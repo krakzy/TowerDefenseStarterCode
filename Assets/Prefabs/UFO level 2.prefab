@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5129499892010643851}
   - component: {fileID: 2185044479473141550}
-  - component: {fileID: 3125130450428572639}
   - component: {fileID: -2098920669083177502}
+  - component: {fileID: 8195295011597680856}
   m_Layer: 0
   m_Name: UFO level 2
   m_TagString: Enemy
@@ -86,21 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3125130450428572639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5018175543643249447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ca23b2704f02a4888b485d00badbb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  health: 15
-  points: 2
 --- !u!70 &-2098920669083177502
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,3 +121,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.64, y: 0.8}
   m_Direction: 0
+--- !u!114 &8195295011597680856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5018175543643249447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ca23b2704f02a4888b485d00badbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  health: 15
+  points: 2
