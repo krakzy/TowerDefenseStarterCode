@@ -11,16 +11,16 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (target == null)
+        if (target != null)
         {
-            Destroy(gameObject); // Vernietig dit projectiel als er geen doelwit is
-            return;
+            Vector3 direction = target.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-
-        // Draai het projectiel naar het doel
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = lookRotation;
+        else
+        {
+            Debug.LogWarning("No target assigned to projectile.");
+        }
     }
 
     // Update is called once per frame
@@ -32,18 +32,10 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // Beweeg het projectiel naar het doel
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-        // Controleer of het projectiel het doel heeft bereikt
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
-        if (distanceToTarget < 0.2f)
+        if(Vector3.Distance(transform.position, target.position) < 0.2f)
         {
-            // Voer schade toe aan het doel (bijvoorbeeld via een Health-component)
-            // Hier kunnen verdere acties worden toegevoegd, zoals het afspelen van een impactgeluid of effect.
-
-            // Vernietig dit projectiel
             Destroy(gameObject);
         }
     }
