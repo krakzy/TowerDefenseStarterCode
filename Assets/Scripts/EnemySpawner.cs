@@ -1,105 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Enums;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // Singleton instance
-    public static EnemySpawner instance;
+    public static EnemySpawner Instance { get; private set; }
 
-    // Public lists for paths and enemy prefabs
-    public List<GameObject> Path1 = new List<GameObject>();
-    public List<GameObject> Path2 = new List<GameObject>();
-    public List<GameObject> Enemies = new List<GameObject>();
+    public List<GameObject> Path1;
+    public List<GameObject> Path2;
+    public List<GameObject> Enemies;
 
-    public static EnemySpawner Get { get { return instance; } }
-
-    // Awake function to set up singleton instance
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void SpawnEnemy(int type, Enums.Path path)
-    {
-        Vector3 spawnPosition;
-        Quaternion spawnRotation;
-
-        if (path == Path.Path1)
-        {
-            spawnPosition = Path1[0].transform.position;
-            spawnRotation = Path1[0].transform.rotation;
-        }
-        else if (path == Path.Path2)
-        {
-            spawnPosition = Path2[0].transform.position;
-            spawnRotation = Path2[0].transform.rotation;
+            Instance = this;
         }
         else
         {
-            spawnPosition = Vector3.zero;
-            spawnRotation = Quaternion.identity;
-            Debug.LogError("Invalid path specified!");
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    private void SpawnEnemy(int type)
+    {
+        if (type < 0 || type >= Enemies.Count)
+        {
+            Debug.LogError("Invalid enemy type index.");
             return;
         }
 
-        var newEnemy = Instantiate(Enemies[type], spawnPosition, spawnRotation);
+        // Choose randomly between Path1 and Path2
+        Enums.Path randomPath = (Enums.Path)Random.Range(0, 2);
+        List<GameObject> selectedPath = (randomPath == Enums.Path.Path1) ? Path1 : Path2;
 
-        var script = newEnemy.GetComponent<Enemy>();
-
-        // set hier het path en target voor je enemy in
-        script.path = path;
-        script.target = Path1[1];
-    }
-
-    public GameObject RequestTarget(Enums.Path path, int index)
-    {
-        List<GameObject> currentPath = null;
-
-        switch (path)
+        if (selectedPath.Count == 0)
         {
-            case Path.Path1:
-                currentPath = Path1;
-                break;
-            case Path.Path2:
-                currentPath = Path2;
-                break;
-            default:
-                Debug.LogError("Invalid path specified!");
-                break;
+            Debug.LogError(randomPath.ToString() + " is not assigned or empty.");
+            return;
         }
 
-        if (currentPath == null || index < 0 || index >= currentPath.Count)
-        {
-            Debug.LogError("Invalid path or index!");
-            return null;
-        }
-        else
-        {
-            return currentPath[index];
-        }
-    }
+        // Start at the first waypoint in the list of the chosen path
+        Vector3 spawnPosition = selectedPath[0].transform.position;
+        Quaternion spawnRotation = selectedPath[0].transform.rotation;
 
-    private void Start()
-    {
-        InvokeRepeating("SpawnTester", 1f, 1f);
-    }
+        GameObject newEnemy = Instantiate(Enemies[type], spawnPosition, spawnRotation);
+        Enemy script = newEnemy.GetComponent<Enemy>();
 
-    private void Update()
-    {
+        // Set the path for the enemy
+        script.SetPath(randomPath);
 
+        // Start at the first point of the path
+        script.SetTarget(selectedPath[0]);
     }
 
     private void SpawnTester()
     {
-        SpawnEnemy(0, Path.Path1);
+        // Spawn an enemy
+        SpawnEnemy(0);
+    }
+
+    void Start()
+    {
+        InvokeRepeating("SpawnTester", 2f, 2f);
     }
 }

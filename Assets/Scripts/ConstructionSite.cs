@@ -1,12 +1,11 @@
 using UnityEngine;
-using Enums;
 
 public class ConstructionSite
 {
     public Vector3Int TilePosition { get; private set; }
     public Vector3 WorldPosition { get; private set; }
-    public Enums.Path Level { get; private set; }  
-    public Enums.TowerType? TowerType { get; private set; }  
+    public Enums.SiteLevel Level { get; private set; }
+    public Enums.TowerType? TowerType { get; private set; }
 
     private GameObject tower;
 
@@ -18,9 +17,9 @@ public class ConstructionSite
         TowerType = null;
     }
 
-    public void SetTower(GameObject newTower, Enums.Path newLevel, Enums.TowerType newType)
+    public void SetTower(GameObject newTower, Enums.SiteLevel newLevel, Enums.TowerType newType)
     {
-        // Check if there is already a tower
+        // Check if there's already a tower
         if (tower != null)
         {
             // Destroy the existing tower before assigning the new one
