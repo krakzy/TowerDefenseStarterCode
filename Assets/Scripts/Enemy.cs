@@ -26,7 +26,8 @@ public class Enemy : MonoBehaviour
         // Check if health is smaller or equal to zero 
         if (health <= 0)
         {
-            // Destroy the game object 
+            // Destroy the game object and add credits
+            GameManager.instance.AddCredits(points);
             Destroy(gameObject);
         }
     }
@@ -63,7 +64,8 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                // If all waypoints are reached, destroy the enemy
+                // If all waypoints are reached, attack the gate and destroy the enemy
+                GameManager.instance.AttackGate();
                 Destroy(gameObject);
             }
         }

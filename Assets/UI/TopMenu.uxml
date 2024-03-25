@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="Wave : l" parse-escape-sequences="true" display-tooltip-when-elided="true" name="waveLabel" style="height: 20px; width: 352px;" />
+        <ui:Label tabindex="-1" text="Credits:l" parse-escape-sequences="true" display-tooltip-when-elided="true" name="creditsLabel" />
+        <ui:Label tabindex="-1" text="Gate Health" parse-escape-sequences="true" display-tooltip-when-elided="true" name="healthLabel" />
+        <ui:Button text="&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="startWaveButton" style="height: 20px; width: 43px;" />
+    </ui:VisualElement>
+</ui:UXML>

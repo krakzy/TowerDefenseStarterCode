@@ -152,13 +152,16 @@ public class TowerMenu : MonoBehaviour
         // Check site level
         int siteLevel = (int)selectedSite.Level;
 
-        // Enable/disable buttons based on siteLevel
+        // Check beschikbare credits
+        int availableCredits = GameManager.instance.GetCredits();
+
+        // Enable/disable buttons based on siteLevel en beschikbare credits
         switch (siteLevel)
         {
             case 0: // If the site level is zero, enable archerButton, wizardButton, and swordButton
-                archerbutton.SetEnabled(true);
-                swordbutton.SetEnabled(true);
-                wizardbutton.SetEnabled(true);
+                archerbutton.SetEnabled(availableCredits >= GameManager.instance.GetCost(TowerType.Archer, SiteLevel.level0));
+                swordbutton.SetEnabled(availableCredits >= GameManager.instance.GetCost(TowerType.Sword, SiteLevel.level0));
+                wizardbutton.SetEnabled(availableCredits >= GameManager.instance.GetCost(TowerType.Wizard, SiteLevel.level0));
                 updatebutton.SetEnabled(false);
                 destroybutton.SetEnabled(false);
                 break;
@@ -167,7 +170,7 @@ public class TowerMenu : MonoBehaviour
                 archerbutton.SetEnabled(false);
                 swordbutton.SetEnabled(false);
                 wizardbutton.SetEnabled(false);
-                updatebutton.SetEnabled(true);
+                updatebutton.SetEnabled(availableCredits >= GameManager.instance.GetCost((TowerType)selectedSite.TowerType, selectedSite.Level + 1));
                 destroybutton.SetEnabled(true);
                 break;
             case 3: // If the site level is 3, only enable destroyButton
@@ -182,4 +185,5 @@ public class TowerMenu : MonoBehaviour
                 break;
         }
     }
+
 }
