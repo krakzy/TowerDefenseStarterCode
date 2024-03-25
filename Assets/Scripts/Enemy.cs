@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enums;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Enemy : MonoBehaviour
 
     public int points = 1; 
 
-    public Path path { get; set; } 
+    public Enums.Path path { get; set; } 
 
     public GameObject target { get; set; } 
 

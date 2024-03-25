@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using Enums;
 
 public class Tower : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Tower : MonoBehaviour
     public float attackSize = 1f; // How big the bullet looks
     public float projectileSpeed = 10f; // Speed of the projectile
     public GameObject bulletPrefab; // The bullet prefab the tower will shoot
-    public TowerType type; // the type of this tower
+    public Enums.TowerType type; // the type of this tower
 
     private float nextAttackTime;
 

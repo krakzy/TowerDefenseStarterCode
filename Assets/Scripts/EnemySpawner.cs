@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enums;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy(int type, Path path)
+    private void SpawnEnemy(int type, Enums.Path path)
     {
         Vector3 spawnPosition;
         Quaternion spawnRotation;
@@ -59,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
         script.target = Path1[1];
     }
 
-    public GameObject RequestTarget(Path path, int index)
+    public GameObject RequestTarget(Enums.Path path, int index)
     {
         List<GameObject> currentPath = null;
 
