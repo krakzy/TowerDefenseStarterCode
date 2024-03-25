@@ -23,4 +23,18 @@ public class TopMenu : MonoBehaviour
         waveLabel.text = text;
     }
 
+    public void WaveButton_clicked()
+    {
+        // Roep de StartWave functie van GameManager aan
+        GameManager.instance.StartWave();
+
+        // Schakel de waveButton uit
+        startWaveButton.SetEnabled(false);
+    }
+
+    public void EnableWaveButton()
+    {
+        // Schakel de waveButton weer in
+        startWaveButton.SetEnabled(true);
+    }
 }

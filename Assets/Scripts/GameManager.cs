@@ -13,13 +13,13 @@ public class GameManager : MonoBehaviour
     private int credits;
     private int health;
     private int currentWave;
+    private bool waveActive = false; // Variable to track if a wave is currently active
 
     private ConstructionSite selectedSite;
 
     // Reference to the menu
     public GameObject menu;
     public GameObject TopMenu;
-
 
     public TopMenu topMenu;
 
@@ -211,5 +211,28 @@ public class GameManager : MonoBehaviour
         menu.GetComponent<TowerMenu>().SetSite(null);
     }
 
+    // Method to start a wave
+    public void StartWave()
+    {
+        // Increment the value of currentWave
+        currentWave++;
+
+        // Change the label for the current wave in topMenu
+        topMenu.SetWaveLabel("Wave: " + currentWave);
+
+        // Start the wave in EnemySpawner
+        EnemySpawner.Instance.StartWave(currentWave);
+
+        waveActive = true; // Set waveActive to true
+    }
+
+    // Method to end a wave
+    public void EndWave()
+    {
+        waveActive = false; // Set waveActive to false
+
+        // Enable the wave button in TopMenu
+        topMenu.EnableWaveButton();
+    }
 }
 

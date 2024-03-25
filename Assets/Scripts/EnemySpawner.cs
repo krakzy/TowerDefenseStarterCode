@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enums;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     public List<GameObject> Path1;
     public List<GameObject> Path2;
     public List<GameObject> Enemies;
+
+    private int ufoCounter = 0;
 
     private void Awake()
     {
@@ -55,14 +58,76 @@ public class EnemySpawner : MonoBehaviour
         script.SetTarget(selectedPath[0]);
     }
 
-    private void SpawnTester()
+    public void StartWave(int number)
+
     {
-        // Spawn an enemy
-        SpawnEnemy(0);
+
+
+        // reset counter 
+
+        ufoCounter = 0;
+
+
+
+        switch (number)
+
+        {
+
+            case 1:
+
+                InvokeRepeating("StartWave1", 1f, 1.5f);
+
+                break;
+
+
+
+        }
+
+    }
+
+    public void StartWave1()
+
+    {
+
+        ufoCounter++;
+
+        // leave some gaps 
+
+        if (ufoCounter % 6 <= 1) return;
+
+
+
+        if (ufoCounter < 30)
+
+        {
+
+            SpawnEnemy(0);
+
+        }
+        else
+
+        {
+
+            // the last Enemy will be level 2 
+
+            SpawnEnemy(1);
+
+        }
+
+
+
+        if (ufoCounter > 30)
+        {
+            CancelInvoke("StartWave1");
+            // Access the instance of GameManager and call the EndWave method
+            GameManager.instance.EndWave();
+        }
+
+
     }
 
     void Start()
     {
-        InvokeRepeating("SpawnTester", 2f, 2f);
+        
     }
 }
