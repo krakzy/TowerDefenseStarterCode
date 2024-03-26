@@ -126,6 +126,191 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    public void StartWave2() 
+    {
+        ufoCounter++;
+
+        // leave some gaps 
+
+        if (ufoCounter % 6 <= 1) return;
+
+
+
+        if (ufoCounter < 50)
+
+        {
+
+            SpawnEnemy(0);
+
+        }
+        else
+
+        {
+
+            // the last Enemy will be level 3 
+
+            SpawnEnemy(2);
+
+        }
+
+
+
+        if (ufoCounter > 50)
+        {
+            CancelInvoke("StartWave1");
+            // Access the instance of GameManager and call the EndWave method
+            GameManager.instance.EndWave();
+        }
+    }
+
+    public void StartWave3()
+    {
+        ufoCounter++;
+
+        // leave some gaps 
+
+        if (ufoCounter % 6 <= 1) return;
+
+
+
+        if (ufoCounter < 50)
+
+        {
+
+            SpawnEnemy(1);
+
+        }
+        else
+
+        {
+
+            // the last Enemy will be level 3 
+
+            SpawnEnemy(2);
+
+        }
+
+
+
+        if (ufoCounter > 50)
+        {
+            CancelInvoke("StartWave1");
+            // Access the instance of GameManager and call the EndWave method
+            GameManager.instance.EndWave();
+        }
+    }
+
+    public void StartWave4()
+    {
+        ufoCounter++;
+
+        // leave some gaps 
+
+        if (ufoCounter % 6 <= 1) return;
+
+
+
+        if (ufoCounter < 75)
+
+        {
+
+            SpawnEnemy(1);
+
+        }
+        else
+
+        {
+
+            // the last Enemy will be level 4
+
+            SpawnEnemy(3);
+
+        }
+
+
+
+        if (ufoCounter > 75)
+        {
+            CancelInvoke("StartWave1");
+            // Access the instance of GameManager and call the EndWave method
+            GameManager.instance.EndWave();
+        }
+    }
+
+    public void StartWave5()
+    {
+        ufoCounter++;
+
+        // leave some gaps 
+
+        if (ufoCounter % 6 <= 1) return;
+
+
+
+        if (ufoCounter < 75)
+
+        {
+
+            SpawnEnemy(2);
+
+        }
+        else
+
+        {
+
+            // the last Enemy will be level 4
+
+            SpawnEnemy(3);
+
+        }
+
+
+
+        if (ufoCounter > 75)
+        {
+            CancelInvoke("StartWave1");
+            // Access the instance of GameManager and call the EndWave method
+            GameManager.instance.EndWave();
+        }
+    }
+
+    public void StartWave6()
+    {
+        ufoCounter++;
+
+        // leave some gaps 
+
+        if (ufoCounter % 6 <= 1) return;
+
+
+
+        if (ufoCounter < 80)
+
+        {
+
+            SpawnEnemy(2);
+
+        }
+        else
+
+        {
+
+            // the last Enemy will be level 5
+
+            SpawnEnemy(4);
+
+        }
+
+
+
+        if (ufoCounter > 80)
+        {
+            CancelInvoke("StartWave1");
+            // Access the instance of GameManager and call the EndWave method
+            GameManager.instance.EndWave();
+        }
+    }
+
     void Start()
     {
         
